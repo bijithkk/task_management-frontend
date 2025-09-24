@@ -3,6 +3,7 @@ import { BsFillBellFill } from "react-icons/bs";
 import { useAuthContext } from "../shared/context/AuthContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 export default function Navbar({ onMenuClick }) {
   const { token } = useAuthContext();
@@ -57,12 +58,12 @@ export default function Navbar({ onMenuClick }) {
                 />
               </div>
 
-              <button
+              <Button
                 className="md:hidden p-2 rounded-lg hover:bg-gray-100"
                 onClick={onMenuClick}
               >
                 <GiHamburgerMenu className="text-2xl" />
-              </button>
+              </Button>
             </>
           )}
         </nav>

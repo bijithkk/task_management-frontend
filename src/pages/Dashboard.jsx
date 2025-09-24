@@ -6,7 +6,7 @@ import MobileSidebar from "../components/dashboard/MobileSidebar";
 export default function Dashboard({ mobileSidebarOpen, toggleSidebar  }) {
   console.log("Dashboard:-",mobileSidebarOpen)
   return (
-    <div className="flex bg-white min-h-screen">
+    <div className="flex bg-white h-screen">
       {/* Sidebar */}
       <Sidebar />
 
@@ -20,7 +20,7 @@ export default function Dashboard({ mobileSidebarOpen, toggleSidebar  }) {
       )}
 
       <main className="flex-1 p-6 overflow-y-auto md:ml-64">
-        <Outlet /> {/* renders NewTask or Today depending on URL */}
+        <Outlet />
       </main>
     </div>
   );

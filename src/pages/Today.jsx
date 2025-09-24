@@ -4,6 +4,7 @@ import { useTasks } from "../shared/hooks/useTasks";
 import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 export default function Today() {
   const { tasks, fetchTasks, updateTaskById } = useTasks();
@@ -62,12 +63,12 @@ export default function Today() {
         ))}
       </div>
       <div className="flex justify-end mt-8">
-        <button
+        <Button
           onClick={handleAddTask}
           className="bg-[#F8F9FA] text-black px-4 py-4 rounded-full shadow-md hover:bg-[#0F5AD1] transition-all"
         >
           <FaPlus />
-        </button>
+        </Button>
       </div>
     </div>
   );

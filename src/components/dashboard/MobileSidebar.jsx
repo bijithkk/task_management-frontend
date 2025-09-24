@@ -3,6 +3,7 @@ import { FaChevronRight, FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import Button from "../Button";
 
 export default function MobileSidebar({ onNavigate }) {
   const [tasksOpen, setTasksOpen] = useState(false);
@@ -19,13 +20,13 @@ export default function MobileSidebar({ onNavigate }) {
   return (
     <div className="flex flex-col gap-4 text-black">
       {/* Calendar */}
-      <button
+      <Button
         onClick={() => setCalendarOpen(!calendarOpen)}
         className="flex justify-between items-center w-full px-2 py-2 hover:bg-[#8B1B1B] rounded-md"
       >
         <span>Calendar</span>
         {calendarOpen ? <FaChevronDown /> : <FaChevronRight />}
-      </button>
+      </Button>
       {calendarOpen && (
         <div>
           <div className="rounded-lg text-black">
@@ -38,40 +39,40 @@ export default function MobileSidebar({ onNavigate }) {
         </div>
       )}
       {/* Tasks */}
-      <button
+      <Button
         onClick={() => setTasksOpen(!tasksOpen)}
         className="flex justify-between items-center w-full px-2 py-2 hover:bg-[#8B1B1B] rounded-md"
       >
         <span>Tasks</span>
         {tasksOpen ? <FaChevronDown /> : <FaChevronRight />}
-      </button>
+      </Button>
       {tasksOpen && (
         <div className="pl-4 flex flex-col gap-1">
-          <button
+          <Button
             onClick={() => handleNavigation("/dashboard/today")}
             className="text-left px-2 py-1 hover:bg-[#7A1515] rounded-md cursor-pointer"
           >
             Today
-          </button>
+          </Button>
         </div>
       )}
 
       {/* Lists */}
-      <button
+      <Button
         onClick={() => setListsOpen(!listsOpen)}
         className="flex justify-between items-center w-full px-2 py-2 hover:bg-[#8B1B1B] rounded-md"
       >
         <span>Lists</span>
         {listsOpen ? <FaChevronDown /> : <FaChevronRight />}
-      </button>
+      </Button>
       {listsOpen && (
         <div className="pl-4 flex flex-col gap-3">
-          <button className="text-left px-2 py-1 hover:bg-[#7A1515] rounded-md cursor-pointer">
+          <Button className="text-left px-2 py-1 hover:bg-[#7A1515] rounded-md cursor-pointer">
             Daily Routines
-          </button>
-          <button className="text-left px-2 py-1 hover:bg-[#7A1515] rounded-md cursor-pointer">
+          </Button>
+          <Button className="text-left px-2 py-1 hover:bg-[#7A1515] rounded-md cursor-pointer">
             Study
-          </button>
+          </Button>
         </div>
       )}
     </div>

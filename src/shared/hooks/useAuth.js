@@ -27,8 +27,12 @@ export function useAuth() {
       localStorage.setItem("ngtoken", res.token);
       return res;
     } catch (err) {
-      setError(err.message);
-      throw err;
+      const message = err.message.includes("-")
+      ? err.message.split("-")[1].trim()
+      : err.message;
+      setError(message);
+      console.log("error:-",message)
+      throw message;
     } finally {
       setLoading(false);
     }

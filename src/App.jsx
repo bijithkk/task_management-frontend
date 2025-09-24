@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Today from "./pages/Today";
-import NewTask from "./components/dashboard/NewTask";
+import NewTask from "./pages/NewTask";
 import PrivateRoute from "./components/PrivateRoute";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
