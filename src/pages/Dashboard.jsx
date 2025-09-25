@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import MobileSidebar from "../components/dashboard/MobileSidebar";
 
 export default function Dashboard({ mobileSidebarOpen, toggleSidebar  }) {
-  console.log("Dashboard:-",mobileSidebarOpen)
   return (
     <div className="flex bg-white min-h-screen">
       {/* Sidebar */}
