@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GiOpenBook } from "react-icons/gi";
 import { useTasks } from "../shared/hooks/useTasks";
 import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import Spinner from "../components/Spinner";
 
 export default function Today() {
-  const { tasks, fetchTasks, updateTaskById } = useTasks();
+  const { tasks, fetchTasks, updateTaskById, loading } = useTasks();
+  const [updatingTaskId, setUpdatingTaskId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,6 +18,7 @@ export default function Today() {
 
   const handleCheckboxChange = async (taskId, isChecked) => {
     try {
+      setUpdatingTaskId(taskId);
       await updateTaskById(taskId, { isCompleted: isChecked });
 
       if (isChecked) {
@@ -28,12 +31,18 @@ export default function Today() {
     } catch (err) {
       console.error("Failed to update task:", err);
       toast.error("Failed to update task.");
+    } finally {
+      setUpdatingTaskId(null);
     }
   };
 
   const handleAddTask = () => {
     navigate("/dashboard/new-task");
   };
+
+  if (loading) {
+    return <Spinner className={`w-12 h-12`} />;
+  }
 
   return (
     <div className="flex flex-col px-6 py-6">
@@ -54,11 +63,17 @@ export default function Today() {
               className="w-4 h-4 accent-[#1877F2]"
               checked={task.isCompleted || false}
               onChange={(e) => handleCheckboxChange(task._id, e.target.checked)}
+              disabled={updatingTaskId === task._id}
             />
             <div className="flex items-center gap-0.5">
               <GiOpenBook className="text-xl" />
               <span>{task.task}</span>
             </div>
+            {updatingTaskId === task._id && (
+              <div className="ml-auto">
+                <Spinner className={`w-8 h-8`} />
+              </div>
+            )}
           </div>
         ))}
       </div>

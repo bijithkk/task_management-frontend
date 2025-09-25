@@ -17,7 +17,6 @@ export function AuthProvider({ children }) {
 
   const handleLogin = async (data) => {
     const res = await login(data);
-    console.log("res :-", res.data.user);
     setToken(res.data.accessToken);
     localStorage.setItem("ngtoken", res.data.accessToken);
     setUser(res.data.user);

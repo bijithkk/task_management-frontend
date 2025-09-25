@@ -4,6 +4,7 @@ import { useAuthContext } from "../../shared/context/AuthContext";
 
 import Input from "../Input";
 import Button from "../Button";
+import Spinner from "../Spinner";
 
 export default function AuthForm({ isLogin, setIsLogin, navigate }) {
   const [formData, setFormData] = useState({
@@ -93,7 +94,7 @@ export default function AuthForm({ isLogin, setIsLogin, navigate }) {
           disabled={loading}
           className="mt-4 p-8 bg-[#F8F9FA] text-black font-semibold py-2 rounded-xl shadow-sm hover:bg-blue-700 transition"
         >
-          {loading ? "Please wait..." : isLogin ? "Login" : "Register"}
+          {loading ? <Spinner className={`w-8 h-8`} /> : isLogin ? "Login" : "Register"}
         </Button>
       </div>
       {/* error */}

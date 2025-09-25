@@ -8,8 +8,10 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import ColorPicker from "../components/newtask/ColorPicker";
 import RepeatCard from "../components/newtask/RepeatCard";
+import Spinner from "../components/Spinner";
 
 export default function NewTask() {
+  const [loading, setLoading] = useState(false);
   const [taskData, setTaskData] = useState({
     task: "",
     description: "",
@@ -40,6 +42,7 @@ export default function NewTask() {
     }
 
     try {
+      setLoading(true);
       await addTask({ ...taskData });
       toast.success("Task added successfully 🎉");
 
@@ -54,6 +57,8 @@ export default function NewTask() {
       });
     } catch (error) {
       toast.error(error.message || "Failed to add task ❌");
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -104,7 +109,7 @@ export default function NewTask() {
           onClick={handleAddTask}
           className="bg-[#F8F9FA] text-black px-4 py-4 rounded-full shadow-md hover:bg-[#0F5AD1] transition-all"
         >
-          <FaCheck />
+          {loading ? <Spinner className={`w-8 h-8`} /> : <FaCheck />}
         </Button>
       </div>
     </>

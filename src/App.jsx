@@ -13,7 +13,6 @@ import { useState } from "react";
 
 function App() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  console.log("App:-",mobileSidebarOpen)
   
 
   const toggleSidebar = () => setMobileSidebarOpen(!mobileSidebarOpen);
