@@ -10,11 +10,23 @@ import Spinner from "../components/Spinner";
 export default function Today() {
   const { tasks, fetchTasks, updateTaskById, loading } = useTasks();
   const [updatingTaskId, setUpdatingTaskId] = useState(null);
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search]);
+
+  useEffect(() => {
+    fetchTasks(debouncedSearch);
+  }, [debouncedSearch]);
 
   const handleCheckboxChange = async (taskId, isChecked) => {
     try {
@@ -27,7 +39,7 @@ export default function Today() {
         toast.info("Task unmarked!");
       }
 
-      fetchTasks();
+      fetchTasks(search);
     } catch (err) {
       console.error("Failed to update task:", err);
       toast.error("Failed to update task.");
@@ -47,6 +59,17 @@ export default function Today() {
   return (
     <div className="flex flex-col px-6 py-6">
       <h1 className="text-2xl font-bold mb-6">Today</h1>
+      {/* Search Input */}
+      <div className="flex items-center justify-center">
+        <input
+          type="text"
+          placeholder="Search tasks..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mb-4 p-2 w-1/2 border border-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
       <div className="flex flex-col gap-4">
         {tasks.length === 0 && (
           <p className="text-gray-500">No tasks available</p>

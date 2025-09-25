@@ -14,10 +14,10 @@ export function useTasks() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchTasks = async () => {
+  const fetchTasks = async (search = "") => {
     try {
       setLoading(true);
-      const res = await getTasks();
+      const res = await getTasks({ search });
       setTasks(res.data.data);
     } catch (err) {
       setError(err.message);
@@ -79,6 +79,6 @@ export function useTasks() {
     fetchTasks,
     fetchTodayTasks,
     fetchTodayCount,
-    updateTaskById
+    updateTaskById,
   };
 }

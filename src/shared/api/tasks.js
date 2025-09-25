@@ -5,8 +5,8 @@ export async function createTask(taskData) {
   return response.data;
 }
 
-export async function getTasks() {
-  const response = await apiClient.get("/task");
+export async function getTasks(params = {}) {
+  const response = await apiClient.get("/task", { params });
   return response.data;
 }
 
